@@ -1,0 +1,91 @@
+TASK:
+Replace the pavilion visible in the rendered image with the provided 3D pavilion model.
+
+This is a geometric substitution task only.
+
+The provided 3D pavilion model is the sole geometric source of truth.
+Copy the pavilion geometry exactly from the 3D model and place it into the rendered scene.
+
+ABSOLUTE GEOMETRY PRESERVATION:
+
+DO NOT redesign.
+DO NOT reinterpret.
+DO NOT optimize.
+DO NOT stylize.
+DO NOT repair.
+DO NOT reconstruct.
+DO NOT approximate.
+
+Use the exact pavilion geometry from the supplied 3D model with 1:1 fidelity.
+
+Geometry Lock = ON
+Scale Lock = ON
+Proportion Lock = ON
+Span Lock = ON
+Thickness Lock = ON
+Profile Lock = ON
+Symmetry Lock = ON
+Topology Lock = ON
+
+No stretching.
+No compression.
+No tapering.
+No thickening.
+No thinning.
+No smoothing.
+No reshaping.
+No modification of member sizes.
+No modification of panel sizes.
+No modification of cable layout.
+
+The pavilion must match the supplied model exactly.
+
+POSITIONING REQUIREMENTS:
+
+Place the pavilion into the rendered scene only.
+
+Align the pavilion to the bridge centerline.
+Align the pavilion landings to the bridge edges.
+
+Both pavilion legs/supports must remain completely outside the roadway envelope.
+
+The left pavilion leg must land outside the bridge deck.
+The right pavilion leg must land outside the bridge deck.
+
+Do not allow any part of either support to intrude into traffic lanes, shoulder areas, median areas, or guardrail zones.
+
+The pavement, traffic lanes, and bridge deck must remain fully unobstructed beneath the pavilion.
+
+SCENE LOCK:
+
+Preserve exactly:
+• Camera position
+• Camera target
+• Perspective
+• Field of view
+• Horizon
+• Composition
+• Road geometry
+• Bridge geometry
+• Vehicles
+• Sky
+• Clouds
+• Landscape
+• Lighting
+• Exposure
+• Reflections
+• Shadows
+• Atmosphere
+• Render style
+
+Do not move, replace, regenerate, or alter any scene element other than the pavilion itself.
+
+OUTPUT REQUIREMENT:
+
+The final image should appear identical to the original render.
+
+The only change permitted is removal of the original pavilion and insertion of the provided 3D pavilion model.
+
+Think of this as a precise cut-and-paste architectural compositing operation, not a redesign task.
+
+If any conflict occurs, preserve the supplied pavilion geometry exactly and modify nothing else.
