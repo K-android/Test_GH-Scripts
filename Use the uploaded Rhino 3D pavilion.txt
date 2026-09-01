@@ -1,0 +1,87 @@
+Use the uploaded Rhino 3D pavilion model as the sole geometric reference.
+
+Modify only the pavilion design according to the following instructions:
+
+1. Replace the existing solid red/orange surface portions with a repeated system of connected panels and cable elements.
+2. The red/orange area should become a continuous patterned assembly made of repeating copper panels connected through a visible cable network.
+3. Preserve the overall pavilion form, dimensions, proportions, span, arch profile, curvature, thickness, structural logic, and design intent exactly as modeled.
+4. Do not alter the footprint, height, width, structural geometry, placement, or silhouette.
+5. Do not introduce new architectural elements, supports, openings, decorations, or changes to the pavilion shape.
+6. All panel components must be copper with realistic copper material properties, subtle weathering, and metallic reflections.
+7. All cable elements should be matte grey metal.
+8. Maintain a clean, buildable architectural detailing language.
+9. Generate the modified pavilion as a high-quality architectural visualization while preserving the exact Rhino geometry.
+
+CRITICAL:
+Preserve all geometry exactly. Only replace the surface treatment within the existing red/orange portions with the repeating copper panel and cable system.
+
+HARD CONSTRAINTS:
+
+- Geometry lock ON
+- Perspective lock ON
+- Camera lock ON
+- Environment lock ON
+- Scale lock ON
+- Composition lock ON
+
+Allowed changes:
+✓ Pavilion surface modification
+✓ Pavilion material replacement
+✓ Pavilion insertion into render
+
+Forbidden changes:
+✗ Change pavilion silhouette
+✗ Change pavilion dimensions
+✗ Change arch profile
+✗ Change bridge geometry
+✗ Change road
+✗ Change vehicles
+✗ Change sky
+✗ Change landscape
+✗ Change camera angle
+✗ Add architectural elements
+✗ Redesign pavilion
+✗ Generate a new scene
+
+The final image should be visually identical to the original render except for the replacement of the pavilion with the modified copper-panel-and-cable pavilion.
+
+
+
+
+
+
+
+
+Use the rendered highway image as the base image.
+
+Replace only the existing pavilion structure with the uploaded modified pavilion design.
+
+Requirements:
+
+1. Match the pavilion position, scale, orientation, perspective, camera angle, and road alignment exactly to the original render.
+2. Preserve the entire environment exactly as shown:
+   - identical sky
+   - identical clouds
+   - identical sunlight direction
+   - identical atmosphere
+   - identical road geometry
+   - identical vehicles
+   - identical guardrails
+   - identical landscape
+   - identical palm trees
+   - identical background structures
+   - identical shadows wherever possible
+
+3. Insert the modified pavilion so it appears naturally integrated into the scene.
+4. Maintain accurate lighting, reflections, shading, material response, and contact shadows.
+5. Copper panels should exhibit realistic metallic reflections from the sunset light.
+6. Grey cables should remain visible and distinct from the copper panels.
+7. Do not redesign, reinterpret, simplify, stylize, or regenerate the architectural geometry.
+
+CRITICAL IMAGE EDITING INSTRUCTION:
+
+This is a replacement task, not a redesign task.
+Keep the original render unchanged except for the pavilion.
+Do not modify the camera view, environment, composition, lighting setup, horizon, landscaping, vehicles, roads, or background.
+Replace only the pavilion with the provided pavilion geometry.
+Preserve the exact geometry and design intent of the uploaded pavilion model.
