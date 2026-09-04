@@ -1,0 +1,36 @@
+import Rhino
+import Rhino.Geometry as rg
+
+if CanopySurface and BaseCurves:
+    try:
+        # 1. Measure the physical aspect ratio of the flat 2D pattern
+        bbox = rg.BoundingBox.Empty
+        for crv in BaseCurves:
+            if crv: bbox.Union(crv.GetBoundingBox(False))
+        
+        pat_u_len = bbox.Max.X - bbox.Min.X
+        pat_v_len = bbox.Max.Y - bbox.Min.Y
+        pat_ratio = pat_u_len / pat_v_len if pat_v_len > 0 else 1.0
+
+        # 2. Measure the physical lengths of the curved roof
+        dom_u = CanopySurface.Domain(0)
+        dom_v = CanopySurface.Domain(1)
+        
+        # Extract isocurves along the middle of the surface for true arc length
+        crv_u = CanopySurface.IsoCurve(0, dom_v.Mid)
+        crv_v = CanopySurface.IsoCurve(1, dom_u.Mid)
+        
+        surf_u_len = crv_u.GetLength()
+        surf_v_len = crv_v.GetLength()
+
+        # 3. Mathematically lock V to U to prevent distortion
+        u_count = max(1, int(GridScale))
+        
+        # Equation: balances surface proportions against pattern proportions
+        exact_v = (surf_v_len / surf_u_len) * pat_ratio * u_count
+        
+        U_Div = u_count
+        V_Div = max(1, int(round(exact_v)))
+        
+    except Exception as e:
+        print("Error: " + str(e))
