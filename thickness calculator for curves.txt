@@ -1,0 +1,84 @@
+import Rhino
+import Rhino.Geometry as rg
+from System.Collections.Generic import List
+
+FinalCurves = List[rg.Curve]()
+out = ""
+
+if BaseCurves is not None:
+    try:
+        # Get thickness value (defaults to 0.0 so it doesn't change anything unless you move the slider)
+        thk = float(StrandThickness) if StrandThickness is not None else 0.0
+        tol = 0.01
+
+        # 1. Sort the curves to find the Outer Boundary vs. Inner Holes
+        outer_crv = None
+        max_diag = -1.0
+        inner_candidates = []
+
+        for crv in BaseCurves:
+            if crv is None: continue
+            diag = crv.GetBoundingBox(False).Diagonal.Length
+            if diag > max_diag:
+                if outer_crv is not None:
+                    inner_candidates.append(outer_crv)
+                outer_crv = crv
+                max_diag = diag
+            else:
+                inner_candidates.append(crv)
+
+        # If thickness slider is at exactly 0, just return the raw base curves
+        if abs(thk) < 0.001:
+            if outer_crv: FinalCurves.Add(outer_crv)
+            for icrv in inner_candidates: FinalCurves.Add(icrv)
+            out = "Thickness delta is 0. Returning original curves."
+            
+        else:
+            # 2. Smart Offset Function
+            def smart_offset(crv, distance, want_larger):
+                success, plane = crv.TryGetPlane(tol)
+                if not success:
+                    plane = rg.Plane.WorldXY
+                    plane.Origin = crv.GetBoundingBox(False).Center
+                
+                # Compute both directions
+                off_A = crv.Offset(plane, distance, tol, rg.CurveOffsetCornerStyle.Sharp)
+                off_B = crv.Offset(plane, -distance, tol, rg.CurveOffsetCornerStyle.Sharp)
+                
+                valid_offsets = []
+                if off_A and len(off_A) > 0: valid_offsets.append(off_A[0])
+                if off_B and len(off_B) > 0: valid_offsets.append(off_B[0])
+                
+                if not valid_offsets:
+                    return crv # Safe fallback
+                    
+                valid_offsets.sort(key=lambda x: x.GetBoundingBox(False).Diagonal.Length)
+                
+                if want_larger:
+                    return valid_offsets[-1]
+                else:
+                    return valid_offsets[0]
+
+            # 3. Dynamic Direction Logic based on Slider Sign
+            # If positive: Outer expands, Inner shrinks
+            # If negative: Outer shrinks, Inner expands
+            outer_expands = True if thk > 0 else False
+            inner_shrinks = False if thk > 0 else True
+
+            # 4. Process Curves using the Absolute value of the distance
+            offset_dist = abs(thk) / 2.0
+
+            if outer_crv:
+                final_outer = smart_offset(outer_crv, offset_dist, outer_expands)
+                FinalCurves.Add(final_outer)
+
+            for icrv in inner_candidates:
+                final_inner = smart_offset(icrv, offset_dist, inner_shrinks)
+                FinalCurves.Add(final_inner)
+
+            out = "Success: Applied a {} delta offset to the strands.".format(thk)
+
+    except Exception as e:
+        out = "Error encountered: {}".format(str(e))
+else:
+    out = "Waiting for BaseCurves input..."
